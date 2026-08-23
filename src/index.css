@@ -1,0 +1,159 @@
+@import 'tailwindcss';
+
+/*
+ * Paleta ENFACI — verdes/teal profundos com apoio em sage green,
+ * seguindo o padrão visual de equipeenfermagem.com.br.
+ */
+@theme {
+  --color-brand-50: #eff8f4;
+  --color-brand-100: #d8ede2;
+  --color-brand-200: #b3dbc8;
+  --color-brand-300: #85c3a7;
+  --color-brand-400: #55a583;
+  --color-brand-500: #348a68;
+  --color-brand-600: #236f53;
+  --color-brand-700: #1c5943;
+  --color-brand-800: #184738;
+  --color-brand-900: #143b2f;
+  --color-brand-950: #0a2119;
+
+  --color-sage-50: #f5f7f2;
+  --color-sage-100: #e8ede1;
+  --color-sage-200: #d2ddc6;
+  --color-sage-300: #b3c6a1;
+  --color-sage-400: #92ad7c;
+  --color-sage-500: #77935f;
+  --color-sage-600: #5d7549;
+  --color-sage-700: #495c3c;
+  --color-sage-800: #3d4c34;
+  --color-sage-900: #35422f;
+
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-brand-50);
+  color: var(--color-brand-950);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Foco visível e consistente em toda a navegação por teclado. */
+:focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/*
+ * Estilos do conteúdo rico vindo da API.
+ *
+ * O HTML é sanitizado no servidor (App\Services\HtmlSanitizer, allowlist de
+ * tags, sem handlers de evento nem URIs executáveis), por isso ele é
+ * injetado com dangerouslySetInnerHTML na página de detalhe.
+ */
+.rich-content {
+  line-height: 1.75;
+  color: var(--color-brand-950);
+}
+
+.rich-content h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-brand-800);
+  border-bottom: 2px solid var(--color-brand-100);
+  padding-bottom: 0.375rem;
+}
+
+.rich-content h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.075rem;
+  font-weight: 600;
+  color: var(--color-brand-700);
+}
+
+.rich-content p {
+  margin-bottom: 1rem;
+}
+
+.rich-content ul,
+.rich-content ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rich-content ul {
+  list-style: disc;
+}
+
+.rich-content ol {
+  list-style: decimal;
+}
+
+.rich-content li::marker {
+  color: var(--color-brand-500);
+  font-weight: 600;
+}
+
+.rich-content a {
+  color: var(--color-brand-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.rich-content blockquote {
+  margin: 1.25rem 0;
+  border-left: 4px solid var(--color-sage-300);
+  background-color: var(--color-sage-50);
+  padding: 0.75rem 1rem;
+  font-style: italic;
+}
+
+.rich-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.rich-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.25rem;
+  font-size: 0.9375rem;
+}
+
+.rich-content th,
+.rich-content td {
+  border: 1px solid var(--color-brand-100);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.rich-content th {
+  background-color: var(--color-brand-50);
+  font-weight: 600;
+}
+
+/* Tabelas largas rolam dentro do próprio container, sem estourar a página. */
+.rich-content .table-scroll,
+.rich-content table {
+  overflow-x: auto;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .rich-content table {
+    display: table;
+  }
+}
