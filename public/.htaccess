@@ -1,0 +1,31 @@
+# Fallback de SPA para hospedagem Apache/CPanel.
+#
+# O roteamento do ENFACI é client-side (React Router). Sem esta regra, um
+# acesso direto a /procedimentos/algum-slug faz o Apache procurar um arquivo
+# com esse caminho e devolver 404. Aqui, qualquer requisição que não case com
+# um arquivo ou diretório real é entregue ao index.html, e o React Router
+# resolve a rota.
+#
+# Este arquivo fica em public/, então o Vite o copia para dist/ no build.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Os assets em /assets têm hash no nome, então podem ser cacheados por muito
+# tempo. O index.html não: ele precisa ser revalidado para que um novo deploy
+# apareça para quem já visitou o site.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2?|svg|png|jpg|jpeg|webp|avif)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>

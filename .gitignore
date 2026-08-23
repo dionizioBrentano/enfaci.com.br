@@ -14,6 +14,7 @@ Thumbs.db
 .idea
 .vscode/*
 !.vscode/extensions.json
+.claude
 
 npm-debug.log*
 yarn-error.log*
