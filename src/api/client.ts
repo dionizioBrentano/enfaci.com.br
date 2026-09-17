@@ -42,3 +42,23 @@ export function getErrorMessage(error: unknown): string {
   }
   return 'Erro inesperado.';
 }
+
+export function isMfaRequired(error: unknown): boolean {
+  if (axios.isAxiosError(error)) {
+    const data = error.response?.data as { code?: string; mfa_required?: boolean; message?: string } | undefined;
+    if (error.response?.status === 403) {
+      if (data?.code === 'mfa_required' || data?.mfa_required === true) {
+        return true;
+      }
+      if (typeof data?.message === 'string') {
+        const lower = data.message.toLowerCase();
+        if (lower.includes('mfa') || lower.includes('dois fatores')) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+

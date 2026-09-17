@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login, register, isAuthenticated } from '../api/auth';
-import { getErrorMessage } from '../api/client';
+import {
+  login,
+  register,
+  getUser,
+  isAuthenticated,
+  hasOnlyProfileRead,
+  isMfaRequired,
+  getErrorMessage,
+} from '../api/auth';
 import styles from './LoginPage.module.css';
 
 export const LoginPage: React.FC = () => {
@@ -10,15 +17,32 @@ export const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Form states
+  // Form states - Login
+  const [identifier, setIdentifier] = useState('');
+
+  // Form states - Register
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   useEffect(() => {
     if (isAuthenticated()) {
-      navigate('/conta', { replace: true });
+      getUser()
+        .then((user) => {
+          if (!user.mfa_enabled) {
+            navigate('/mfa', { replace: true, state: { mode: 'setup' } });
+          } else {
+            navigate('/conta', { replace: true });
+          }
+        })
+        .catch((err) => {
+          if (isMfaRequired(err)) {
+            navigate('/mfa', { replace: true, state: { mode: 'verify' } });
+          }
+        });
     }
   }, [navigate]);
 
@@ -33,9 +57,29 @@ export const LoginPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      await login({ email, password });
+      const authRes = await login({ identifier, password });
+
+      // Se o usuário já possui MFA habilitado e a API solicitou verificação
+      if (authRes.mfa_required) {
+        navigate('/mfa', { state: { mode: 'verify' } });
+        return;
+      }
+
+      // GET /user depois do login
+      const user = await getUser();
+
+      // Se abilities só profile:read ou sem MFA habilitado, mostrar setup
+      if (hasOnlyProfileRead(authRes.abilities) || !user.mfa_enabled) {
+        navigate('/mfa', { state: { mode: 'setup' } });
+        return;
+      }
+
       navigate('/conta');
     } catch (err) {
+      if (isMfaRequired(err)) {
+        navigate('/mfa', { state: { mode: 'verify' } });
+        return;
+      }
       setErrorMessage(getErrorMessage(err));
     } finally {
       setIsLoading(false);
@@ -59,8 +103,16 @@ export const LoginPage: React.FC = () => {
         email,
         password,
         password_confirmation: passwordConfirmation,
+        cpf: cpf.trim() ? cpf.trim() : undefined,
+        phone: phone.trim() ? phone.trim() : undefined,
       });
-      navigate('/conta');
+
+      const user = await getUser();
+      if (!user.mfa_enabled) {
+        navigate('/mfa', { state: { mode: 'setup' } });
+      } else {
+        navigate('/conta');
+      }
     } catch (err) {
       setErrorMessage(getErrorMessage(err));
     } finally {
@@ -95,17 +147,18 @@ export const LoginPage: React.FC = () => {
       {activeTab === 'login' ? (
         <form className={styles.form} onSubmit={handleLoginSubmit}>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="login-email">
-              E-mail
+            <label className={styles.label} htmlFor="login-identifier">
+              E-mail, CPF ou Telefone
             </label>
             <input
-              id="login-email"
-              type="email"
+              id="login-identifier"
+              type="text"
               className={styles.input}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
               required
-              autoComplete="email"
+              autoComplete="username"
+              placeholder="seu@email.com, CPF ou telefone"
             />
           </div>
 
@@ -161,6 +214,36 @@ export const LoginPage: React.FC = () => {
           </div>
 
           <div className={styles.field}>
+            <label className={styles.label} htmlFor="register-cpf">
+              CPF (opcional)
+            </label>
+            <input
+              id="register-cpf"
+              type="text"
+              className={styles.input}
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+              autoComplete="off"
+              placeholder="000.000.000-00"
+            />
+          </div>
+
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="register-phone">
+              Telefone (opcional)
+            </label>
+            <input
+              id="register-phone"
+              type="tel"
+              className={styles.input}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              autoComplete="tel"
+              placeholder="DDD + Número"
+            />
+          </div>
+
+          <div className={styles.field}>
             <label className={styles.label} htmlFor="register-password">
               Senha
             </label>
@@ -198,3 +281,4 @@ export const LoginPage: React.FC = () => {
     </div>
   );
 };
+
