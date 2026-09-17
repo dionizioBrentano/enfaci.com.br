@@ -1,12 +1,9 @@
 #!/bin/bash
-# Coloque este arquivo em: /home/postodee/enfaci.com.br/scripts/publicar-enfaci.sh
-# No Terminal do cPanel: bash /home/postodee/enfaci.com.br/scripts/publicar-enfaci.sh
-# O GitHub precisa ter a pasta dist (build no PC + git add dist + push).
-# Este script NAO usa Node.
+# No cPanel: cd ~/enfaci.com.br && bash scripts/publicar-enfaci.sh
 
 set -euo pipefail
 
-SITE="/home/postodee/enfaci.com.br"
+SITE="$HOME/enfaci.com.br"
 BRANCH="feat/auth-local"
 
 cd "$SITE"
