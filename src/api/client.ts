@@ -45,9 +45,15 @@ export function getErrorMessage(error: unknown): string {
 
 export function isMfaRequired(error: unknown): boolean {
   if (axios.isAxiosError(error)) {
-    const data = error.response?.data as { code?: string; mfa_required?: boolean; message?: string } | undefined;
+    const data = error.response?.data as
+      | { code?: string; error?: string; mfa_required?: boolean; message?: string }
+      | undefined;
     if (error.response?.status === 403) {
-      if (data?.code === 'mfa_required' || data?.mfa_required === true) {
+      if (
+        data?.code === 'mfa_required' ||
+        data?.error === 'mfa_required' ||
+        data?.mfa_required === true
+      ) {
         return true;
       }
       if (typeof data?.message === 'string') {

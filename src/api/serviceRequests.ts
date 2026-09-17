@@ -2,6 +2,7 @@ import { apiClient } from './client';
 import type {
   ServiceRequest,
   CreateServiceRequestPayload,
+  ServiceRequestStatus,
 } from '../types/serviceRequest';
 import type { PaginationMeta } from '../types/procedure';
 
@@ -58,3 +59,32 @@ export async function getServiceRequestById(id: string): Promise<ServiceRequest>
     throw error;
   }
 }
+
+/**
+ * Atualiza o status de uma solicitação de atendimento (EST-15).
+ * PATCH /api/v1/service-requests/{id}
+ */
+export async function updateStatus(
+  id: string,
+  status: ServiceRequestStatus
+): Promise<ServiceRequest> {
+  try {
+    const response = await apiClient.patch<{ data?: ServiceRequest; message?: string } | ServiceRequest>(
+      `/api/v1/service-requests/${encodeURIComponent(id)}`,
+      { status }
+    );
+    const body = response.data;
+    if (body && typeof body === 'object') {
+      if ('data' in body && body.data && typeof body.data === 'object') {
+        return body.data as ServiceRequest;
+      }
+      if ('id' in body) {
+        return body as ServiceRequest;
+      }
+    }
+    return { id, status } as ServiceRequest;
+  } catch (error) {
+    throw error;
+  }
+}
+

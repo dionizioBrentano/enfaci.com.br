@@ -182,3 +182,63 @@
   padding: 3rem;
   color: #718096;
 }
+
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #edf2f7;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  padding: 0.45rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnAccept {
+  background-color: #2f855a;
+  color: #ffffff;
+  border-color: #2f855a;
+}
+
+.btnAccept:hover:not(:disabled) {
+  background-color: #276749;
+}
+
+.btnComplete {
+  background-color: #6b46c1;
+  color: #ffffff;
+  border-color: #6b46c1;
+}
+
+.btnComplete:hover:not(:disabled) {
+  background-color: #553c9a;
+}
+
+.btnCancel {
+  background-color: #ffffff;
+  color: #e53e3e;
+  border-color: #feb2b2;
+}
+
+.btnCancel:hover:not(:disabled) {
+  background-color: #fff5f5;
+  border-color: #e53e3e;
+}
+

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
-import { getServiceRequests } from '../api/serviceRequests';
-import { isAuthenticated, isMfaRequired, getErrorMessage } from '../api/auth';
+import { getServiceRequests, updateStatus } from '../api/serviceRequests';
+import { getUser, isAuthenticated, isMfaRequired, getErrorMessage } from '../api/auth';
+import type { User } from '../types/auth';
 import type { ServiceRequest, ServiceRequestStatus, SlotWindow } from '../types/serviceRequest';
 import styles from './ServiceRequestsPage.module.css';
 
@@ -24,8 +25,11 @@ export const ServiceRequestsPage: React.FC = () => {
   const location = useLocation();
 
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   const successMessage = (location.state as { successMessage?: string } | null)?.successMessage;
 
@@ -42,16 +46,17 @@ export const ServiceRequestsPage: React.FC = () => {
     setIsLoading(true);
     setErrorMessage(null);
 
-    getServiceRequests()
-      .then((res) => {
+    Promise.all([getUser(), getServiceRequests()])
+      .then(([userData, res]) => {
         if (!isMounted) return;
+        setCurrentUser(userData);
         setRequests(res.data);
         setIsLoading(false);
       })
       .catch((err) => {
         if (!isMounted) return;
         if (isMfaRequired(err)) {
-          navigate('/mfa', {
+          navigate('/mfa?returnTo=/solicitacoes', {
             state: { mode: 'verify', returnTo: '/solicitacoes' },
           });
           return;
@@ -64,6 +69,30 @@ export const ServiceRequestsPage: React.FC = () => {
       isMounted = false;
     };
   }, [navigate]);
+
+  const handleUpdateStatus = async (id: string, newStatus: ServiceRequestStatus) => {
+    setUpdatingId(id);
+    setActionError(null);
+
+    try {
+      const updated = await updateStatus(id, newStatus);
+      setRequests((prev) =>
+        prev.map((req) =>
+          req.id === id ? { ...req, ...updated, status: updated.status || newStatus } : req
+        )
+      );
+    } catch (err) {
+      if (isMfaRequired(err)) {
+        navigate('/mfa?returnTo=/solicitacoes', {
+          state: { mode: 'verify', returnTo: '/solicitacoes' },
+        });
+        return;
+      }
+      setActionError(getErrorMessage(err));
+    } finally {
+      setUpdatingId(null);
+    }
+  };
 
   const formatDate = (dateStr?: string) => {
     if (!dateStr) return '-';
@@ -101,6 +130,7 @@ export const ServiceRequestsPage: React.FC = () => {
 
       {successMessage && <div className={styles.successAlert}>{successMessage}</div>}
       {errorMessage && <div className={styles.errorBox}>{errorMessage}</div>}
+      {actionError && <div className={styles.errorBox}>{actionError}</div>}
 
       {isLoading ? (
         <div className={styles.loading}>Carregando solicitações...</div>
@@ -123,6 +153,18 @@ export const ServiceRequestsPage: React.FC = () => {
               className: styles.badgeRequested,
             };
             const windowLabel = WINDOW_LABELS[req.slot_window] || req.slot_window;
+
+            const isStaff =
+              currentUser?.user_type === 'professional' || currentUser?.user_type === 'admin';
+            const isUpdating = updatingId === req.id;
+
+            const canAccept = isStaff && req.status === 'requested';
+            const canComplete = isStaff && req.status === 'accepted';
+            const canCancel =
+              (isStaff && (req.status === 'requested' || req.status === 'accepted')) ||
+              (!isStaff && req.status === 'requested');
+
+            const hasActions = canAccept || canComplete || canCancel;
 
             return (
               <article key={req.id} className={styles.card}>
@@ -165,6 +207,43 @@ export const ServiceRequestsPage: React.FC = () => {
                 {req.notes_cliente && (
                   <div className={styles.notes}>
                     <strong>Observações:</strong> {req.notes_cliente}
+                  </div>
+                )}
+
+                {hasActions && (
+                  <div className={styles.cardActions}>
+                    {canAccept && (
+                      <button
+                        type="button"
+                        className={`${styles.actionBtn} ${styles.btnAccept}`}
+                        disabled={isUpdating}
+                        onClick={() => handleUpdateStatus(req.id, 'accepted')}
+                      >
+                        {isUpdating ? 'Salvando...' : 'Aceitar'}
+                      </button>
+                    )}
+
+                    {canComplete && (
+                      <button
+                        type="button"
+                        className={`${styles.actionBtn} ${styles.btnComplete}`}
+                        disabled={isUpdating}
+                        onClick={() => handleUpdateStatus(req.id, 'done')}
+                      >
+                        {isUpdating ? 'Salvando...' : 'Concluir'}
+                      </button>
+                    )}
+
+                    {canCancel && (
+                      <button
+                        type="button"
+                        className={`${styles.actionBtn} ${styles.btnCancel}`}
+                        disabled={isUpdating}
+                        onClick={() => handleUpdateStatus(req.id, 'cancelled')}
+                      >
+                        {isUpdating ? 'Salvando...' : 'Cancelar'}
+                      </button>
+                    )}
                   </div>
                 )}
               </article>
