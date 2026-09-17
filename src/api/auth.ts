@@ -31,7 +31,7 @@ export async function register(credentials: RegisterCredentials): Promise<AuthRe
       email: credentials.email,
       password: credentials.password,
       password_confirmation: credentials.password_confirmation,
-      user_type: 'professional',
+      user_type: credentials.user_type || 'patient',
       ...(credentials.cpf ? { cpf: credentials.cpf } : {}),
       ...(credentials.phone ? { phone: credentials.phone } : {}),
     });

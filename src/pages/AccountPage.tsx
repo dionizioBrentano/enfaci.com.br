@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Navbar } from '../components/Navbar';
 import {
   getUser,
   updateProfile,
@@ -113,8 +114,11 @@ export const AccountPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className={styles.card}>
-        <div className={styles.loading}>Carregando dados do usuário...</div>
+      <div style={{ width: '100%' }}>
+        <Navbar />
+        <div className={styles.card}>
+          <div className={styles.loading}>Carregando dados do usuário...</div>
+        </div>
       </div>
     );
   }
@@ -122,7 +126,9 @@ export const AccountPage: React.FC = () => {
   const identities = user?.identities ?? [];
 
   return (
-    <div className={styles.card}>
+    <div style={{ width: '100%' }}>
+      <Navbar />
+      <div className={styles.card}>
       <h1 className={styles.title}>Minha Conta</h1>
       <p className={styles.subtitle}>Informações do Perfil</p>
 
@@ -220,6 +226,7 @@ export const AccountPage: React.FC = () => {
         </button>
       </div>
     </div>
-  );
+  </div>
+);
 };
 

@@ -1,5 +1,6 @@
-﻿import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { Navbar } from '../components/Navbar';
 import { setupMfa, verifyMfa, isAuthenticated, getErrorMessage } from '../api/auth';
 import type { MfaSetupResponse } from '../types/auth';
 import styles from './MfaPage.module.css';
@@ -12,8 +13,9 @@ interface LocationState {
 export const MfaPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const state = location.state as LocationState | null;
-  const returnTo = state?.returnTo || '/conta';
+  const returnTo = state?.returnTo || searchParams.get('returnTo') || '/conta';
 
   const [mode, setMode] = useState<'setup' | 'verify'>(state?.mode || 'setup');
   const [setupData, setSetupData] = useState<MfaSetupResponse | null>(null);
@@ -84,7 +86,9 @@ export const MfaPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.card}>
+    <div style={{ width: '100%' }}>
+      <Navbar />
+      <div className={styles.card}>
       <h1 className={styles.title}>Autenticação em Duas Etapas</h1>
       <p className={styles.subtitle}>
         {mode === 'setup' ? 'Configuração do MFA' : 'Verificação de Segurança'}
@@ -178,6 +182,7 @@ export const MfaPage: React.FC = () => {
           </form>
         </>
       )}
+      </div>
     </div>
   );
 };

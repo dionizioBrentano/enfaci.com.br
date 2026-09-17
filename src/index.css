@@ -22,13 +22,15 @@ body {
   min-width: 320px;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
 #root {
   width: 100%;
-  max-width: 480px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
