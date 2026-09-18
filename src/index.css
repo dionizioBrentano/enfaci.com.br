@@ -51,10 +51,18 @@ body {
 
 #root {
   width: 100%;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
+
+/* Conteúdo das páginas com respiro centralizado sem prender o header */
+#root > div > *:not(header):not(aside) {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+}
+

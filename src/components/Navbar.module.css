@@ -3,20 +3,38 @@
    Inspirado no modelo visual 60plus SuperEscolha
    ═══════════════════════════════════════════════ */
 
-/* ── BARRA BRANCA PRINCIPAL ── */
+/* ── BARRA BRANCA PRINCIPAL (FULL WIDTH) ── */
 .navbar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   background-color: #ffffff;
-  min-height: var(--nav-h, 72px);
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--se-radius, 8px);
-  box-shadow: var(--se-shadow-sm, 0 2px 8px rgba(26, 58, 53, 0.08));
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  margin-bottom: 1.5rem;
-  position: relative;
+  width: 100%;
+  max-width: none;
+  height: 68px;
+  min-height: 64px;
+  padding: 0 1.25rem;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid #e8e4dc;
+  position: sticky;
+  top: 0;
   z-index: 100;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    height: 72px;
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar {
+    padding: 0 3rem;
+  }
 }
 
 /* ── HAMBÚRGUER (MOBILE) ── */
@@ -74,8 +92,8 @@
 }
 
 .logoImg {
-  height: 42px;
-  max-height: 48px;
+  height: 38px;
+  max-height: 40px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -309,6 +327,7 @@
   }
 
   .logoImg {
-    height: 46px;
+    height: 38px;
+    max-height: 40px;
   }
 }
