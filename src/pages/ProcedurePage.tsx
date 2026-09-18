@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { getPublicProcedureBySlug } from '../api/procedures';
+import { getPublicReviews } from '../api/reviews';
 import { searchOfferings } from '../api/offerings';
 import { createServiceRequest } from '../api/serviceRequests';
 import { isAuthenticated, isMfaRequired, getErrorMessage } from '../api/auth';
 import type { PublicProcedure } from '../types/procedure';
 import type { PublicOffering } from '../types/offering';
-import type { SlotWindow } from '../types/serviceRequest';
+import type { SlotWindow, ServiceReview } from '../types/serviceRequest';
 import styles from './ProcedurePage.module.css';
 
 // Slug canônico da API para administração intramuscular
@@ -92,6 +93,7 @@ export const ProcedurePage: React.FC = () => {
 
   const [procedure, setProcedure] = useState<PublicProcedure | null>(null);
   const [actualSlug, setActualSlug] = useState<string>(slug || '');
+  const [reviews, setReviews] = useState<ServiceReview[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -192,6 +194,21 @@ export const ProcedurePage: React.FC = () => {
       isMounted = false;
     };
   }, [slug]);
+
+  // Carrega as avaliações públicas deste procedimento (EST-15)
+  useEffect(() => {
+    if (!actualSlug) return;
+    let isMounted = true;
+    getPublicReviews({ procedure_slug: actualSlug })
+      .then((data) => {
+        if (isMounted) setReviews(data);
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, [actualSlug]);
 
   // Formatação de CEP
   const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -519,6 +536,53 @@ export const ProcedurePage: React.FC = () => {
           </form>
         </aside>
       </div>
+
+      {/* Avaliações Públicas do Procedimento (EST-15) */}
+      {reviews.length > 0 && (
+        <section className={styles.reviewsSection}>
+          <h2 className={styles.reviewsTitle}>Avaliações deste Procedimento</h2>
+          <div className={styles.reviewsGrid}>
+            {reviews.map((rev) => {
+              const authorDisplay = rev.anonymous
+                ? 'Paciente'
+                : rev.client_name || rev.user_name || rev.user?.name || 'Paciente';
+
+              return (
+                <div key={rev.id} className={styles.reviewCard}>
+                  <div className={styles.reviewCardHeader}>
+                    <div className={styles.reviewStars}>
+                      {[1, 2, 3, 4, 5].map((val) => (
+                        <span
+                          key={val}
+                          className={val <= rev.stars ? styles.starFilled : styles.starEmpty}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {rev.body && <p className={styles.reviewText}>"{rev.body}"</p>}
+
+                  <div className={styles.reviewAuthor}>
+                    <div className={styles.authorAvatar}>
+                      {rev.anonymous ? '✓' : authorDisplay.charAt(0).toUpperCase()}
+                    </div>
+                    <div className={styles.authorMeta}>
+                      <span className={styles.authorName}>{authorDisplay}</span>
+                      {rev.anonymous ? (
+                        <span className={styles.anonymousBadge}>Avaliação anônima</span>
+                      ) : (
+                        <span className={styles.anonymousBadge}>Atendimento verificado</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

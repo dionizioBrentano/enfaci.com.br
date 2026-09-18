@@ -88,3 +88,9 @@ export async function updateStatus(
   }
 }
 
+export {
+  createServiceReview,
+  publishServiceReview,
+  getPublicReviews,
+} from './reviews';
+

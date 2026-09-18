@@ -242,3 +242,199 @@
   border-color: #e53e3e;
 }
 
+/* Seção de Avaliação e Depoimento (EST-15) */
+.reviewSection {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #edf2f7;
+}
+
+.reviewTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.starBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0 0.15rem;
+  transition: transform 0.1s ease, color 0.1s ease;
+}
+
+.starBtn:hover {
+  transform: scale(1.15);
+}
+
+.starFilled {
+  color: #ecc94b;
+}
+
+.starEmpty {
+  color: #cbd5e0;
+}
+
+.starCountText {
+  font-size: 0.8125rem;
+  color: #718096;
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+.reviewTextarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 70px;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.875rem;
+  resize: vertical;
+  color: #2d3748;
+  margin-bottom: 0.75rem;
+}
+
+.reviewTextarea:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+
+.reviewCheckboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: #4a5568;
+  cursor: pointer;
+}
+
+.checkboxInput {
+  cursor: pointer;
+}
+
+.reviewReadOnly {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.reviewReadOnlyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.reviewMetaBadges {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.badgeReviewAnonymous {
+  background: #edf2f7;
+  color: #4a5568;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.badgeReviewPublished {
+  background: #c6f6d5;
+  color: #22543d;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.badgeReviewPending {
+  background: #feebc8;
+  color: #744210;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.reviewBodyText {
+  font-size: 0.875rem;
+  color: #2d3748;
+  line-height: 1.4;
+  margin-top: 0.25rem;
+}
+
+.btnSubmitReview {
+  background-color: #2b6cb0;
+  color: #ffffff;
+  border: 1px solid #2b6cb0;
+  padding: 0.45rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btnSubmitReview:hover:not(:disabled) {
+  background-color: #2c5282;
+}
+
+.btnSubmitReview:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnPublishReview {
+  background-color: #2b6cb0;
+  color: #ffffff;
+  border: 1px solid #2b6cb0;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btnPublishReview:hover:not(:disabled) {
+  background-color: #2c5282;
+}
+
+.btnPublishReview:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

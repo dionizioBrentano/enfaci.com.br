@@ -26,6 +26,36 @@ export interface ServiceRequestPoint {
   cep: string;
 }
 
+export interface ServiceReview {
+  id: string;
+  service_request_id?: string;
+  stars: number;
+  body: string | null;
+  anonymous: boolean;
+  publish_requested: boolean;
+  published_at?: string | null;
+  client_name?: string | null;
+  user_name?: string | null;
+  user?: {
+    id?: string | number;
+    name?: string;
+  } | null;
+  procedure?: {
+    id?: string;
+    title?: string;
+    slug?: string;
+  } | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface CreateServiceReviewPayload {
+  stars: number;
+  body?: string | null;
+  anonymous: boolean;
+  publish_requested: boolean;
+}
+
 export interface ServiceRequest {
   id: string;
   tenant_id?: string;
@@ -42,6 +72,7 @@ export interface ServiceRequest {
   slot_window: SlotWindow;
   status: ServiceRequestStatus;
   notes_cliente?: string | null;
+  review?: ServiceReview | null;
   created_at?: string;
   updated_at?: string;
 }

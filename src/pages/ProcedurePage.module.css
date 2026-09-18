@@ -344,10 +344,109 @@
 }
 
 .authNotice {
-  font-size: 0.75rem;
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
   color: #718096;
   text-align: center;
-  margin-top: 0.25rem;
+}
+
+/* Seção de Depoimentos / Avaliações do Procedimento (EST-15) */
+.reviewsSection {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.reviewsTitle {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 1.25rem;
+}
+
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.reviewCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.reviewCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.reviewStars {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.starFilled {
+  color: #ecc94b;
+  font-size: 1.125rem;
+}
+
+.starEmpty {
+  color: #cbd5e0;
+  font-size: 1.125rem;
+}
+
+.reviewText {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #2d3748;
+  font-style: italic;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.reviewAuthor {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #edf2f7;
+}
+
+.authorAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authorMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorName {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.anonymousBadge {
+  font-size: 0.6875rem;
+  color: #718096;
 }
 
 .loading {
