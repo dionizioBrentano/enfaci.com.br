@@ -285,7 +285,7 @@ export const HomePage: React.FC = () => {
               <div className="tile-card-body">
                 <span className="tile-card-cat">Procedimento</span>
                 <h3 className="tile-card-title">Aplicação de medicamentos injetáveis</h3>
-                <Link to="/servicos/medicamentos-injetaveis" className="tile-card-cta">
+                <Link to="/servicos/administracao-de-medicamentos-por-via-intramuscular" className="tile-card-cta">
                   Ver procedimento
                 </Link>
               </div>
@@ -296,7 +296,7 @@ export const HomePage: React.FC = () => {
               <div className="tile-card-body">
                 <span className="tile-card-cat">Procedimento</span>
                 <h3 className="tile-card-title">Curativo em ferida operatória</h3>
-                <Link to="/servicos/enfermagem-ferida-operatoria" className="tile-card-cta">
+                <Link to="/servicos/curativo-de-ferida-operatoria-e-retirada-de-pontos" className="tile-card-cta">
                   Ver procedimento
                 </Link>
               </div>
@@ -307,7 +307,7 @@ export const HomePage: React.FC = () => {
               <div className="tile-card-body">
                 <span className="tile-card-cat">Procedimento</span>
                 <h3 className="tile-card-title">Cuidados com gastrostomia</h3>
-                <Link to="/servicos/cuidados-gastrostomia" className="tile-card-cta">
+                <Link to="/servicos/cuidados-com-gastrostomia" className="tile-card-cta">
                   Ver procedimento
                 </Link>
               </div>
@@ -327,9 +327,9 @@ export const HomePage: React.FC = () => {
             <article className="tile-card">
               <div className="tile-card-img" role="img" aria-label="Consulta de enfermagem" />
               <div className="tile-card-body">
-                <span className="tile-card-cat">Consulta</span>
-                <h3 className="tile-card-title">Consulta de enfermagem</h3>
-                <Link to="/servicos/consulta" className="tile-card-cta">
+                <span className="tile-card-cat">Atendimento</span>
+                <h3 className="tile-card-title">Solicitações de Atendimento</h3>
+                <Link to="/solicitacoes" className="tile-card-cta">
                   Agendar
                 </Link>
               </div>
@@ -338,11 +338,11 @@ export const HomePage: React.FC = () => {
             <article className="tile-card">
               <div className="tile-card-img" role="img" aria-label="Equipe técnica de enfermagem" />
               <div className="tile-card-body">
-                <span className="tile-card-cat">Pessoal</span>
+                <span className="tile-card-cat">Equipe</span>
                 <h3 className="tile-card-title">Técnicos e enfermeiros</h3>
-                <Link to="/servicos/pessoal" className="tile-card-cta">
-                  Ver equipe
-                </Link>
+                <a href="/#home-care" className="tile-card-cta">
+                  Conhecer
+                </a>
               </div>
             </article>
           </div>

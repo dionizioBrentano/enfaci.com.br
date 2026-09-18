@@ -5,7 +5,7 @@ import type { NavNode, TrailItem, OtherBranchItem, HeaderContext } from '../type
  */
 export function hrefToRoute(href: string): string {
   if (!href) return '/';
-  if (href === 'servicos.html') return '/solicitacoes';
+  if (href === 'servicos.html') return '/';
   if (href === 'procedimentos.html') return '/';
   const clean = href.replace(/\.html$/, '');
   return `/servicos/${clean}`;
@@ -191,13 +191,8 @@ export function getFocusAndOtherBranches(
  * Encontra o caminho na árvore correspondente à URL/slug atual.
  */
 export function findPathByPathname(tree: NavNode[], pathname: string): number[] {
-  if (pathname === '/' || !pathname) {
+  if (pathname === '/' || !pathname || pathname === '/solicitacoes') {
     return [0]; // Padrão: Procedimentos de Enfermagem
-  }
-
-  if (pathname === '/solicitacoes') {
-    const servicosIdx = tree.findIndex((node) => node.href === 'servicos.html');
-    if (servicosIdx !== -1) return [servicosIdx];
   }
 
   // Extrair slug de /servicos/:slug

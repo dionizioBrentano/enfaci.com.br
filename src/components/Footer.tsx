@@ -46,19 +46,19 @@ export const Footer: React.FC = () => {
           <h4 className="footer-col-title">Procedimentos</h4>
           <ul className="footer-links">
             <li>
-              <Link to="/servicos/aplicacao-medicamentos">Aplicação de medicamentos</Link>
+              <a href="/#procedimentos">Aplicação de medicamentos</a>
             </li>
             <li>
-              <Link to="/servicos/curativos">Curativos</Link>
+              <a href="/#procedimentos">Curativos</a>
             </li>
             <li>
-              <Link to="/servicos/eliminacoes">Eliminações</Link>
+              <a href="/#procedimentos">Eliminações</a>
             </li>
             <li>
-              <Link to="/servicos/vias-aereas">Vias aéreas</Link>
+              <a href="/#procedimentos">Vias aéreas</a>
             </li>
             <li>
-              <Link to="/servicos/sondas">Sondas</Link>
+              <a href="/#procedimentos">Sondas</a>
             </li>
           </ul>
         </div>
@@ -70,13 +70,13 @@ export const Footer: React.FC = () => {
               <a href="/#home-care">Home care</a>
             </li>
             <li>
-              <Link to="/servicos/nossa-equipe">Nossa equipe</Link>
+              <a href="/#home-care">Nossa equipe</a>
             </li>
             <li>
-              <Link to="/servicos/missao">Missão e valores</Link>
+              <a href="/#sobre">Missão e valores</a>
             </li>
             <li>
-              <Link to="/servicos/contatos">Contatos</Link>
+              <a href="/#contato">Contatos</a>
             </li>
           </ul>
         </div>
@@ -88,7 +88,7 @@ export const Footer: React.FC = () => {
               <Link to="/login">Entrar / Cadastrar</Link>
             </li>
             <li>
-              <Link to="/servicos/consultas">Consultas</Link>
+              <Link to="/solicitacoes">Solicitações de Atendimento</Link>
             </li>
             <li>
               <Link to="/solicitacoes">Serviços prestados</Link>

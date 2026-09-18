@@ -230,7 +230,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                   </Link>
 
                   <Link
-                    to="/servicos/enfermagem-ferida-operatoria"
+                    to="/servicos/curativo-de-ferida-operatoria-e-retirada-de-pontos"
                     className="mega-link"
                     onClick={() => setActiveMega(null)}
                   >
@@ -241,30 +241,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                       </svg>
                     </div>
                     <div className="mega-link-text">
-                      <span className="mega-link-title">Ferida Operatória</span>
-                      <span className="mega-link-desc">Pós-cirúrgico com segurança</span>
+                      <span className="mega-link-title">Ferida Operatória e Pontos</span>
+                      <span className="mega-link-desc">Pós-cirúrgico e retirada de suturas</span>
                     </div>
                   </Link>
 
                   <Link
-                    to="/servicos/retirada-pontos"
-                    className="mega-link"
-                    onClick={() => setActiveMega(null)}
-                  >
-                    <div className="mega-link-icon">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="m6 6 12 12M6 18 18 6" />
-                        <circle cx="12" cy="12" r="9" />
-                      </svg>
-                    </div>
-                    <div className="mega-link-text">
-                      <span className="mega-link-title">Retirada de Pontos</span>
-                      <span className="mega-link-desc">Suturas cirúrgicas e grampos</span>
-                    </div>
-                  </Link>
-
-                  <Link
-                    to="/servicos/lpp"
+                    to="/servicos/prevencao-e-tratamento-de-lesao-por-pressao"
                     className="mega-link"
                     onClick={() => setActiveMega(null)}
                   >
@@ -276,12 +259,12 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                     </div>
                     <div className="mega-link-text">
                       <span className="mega-link-title">Lesão por Pressão</span>
-                      <span className="mega-link-desc">Cuidado avançado e prevenção</span>
+                      <span className="mega-link-desc">Prevenção e tratamento avançado</span>
                     </div>
                   </Link>
                 </div>
 
-                {/* Coluna 2: Medicações e Eliminações */}
+                {/* Coluna 2: Medicações e Sondas */}
                 <div className="mega-col">
                   <span className="mega-col-label">Medicações e Sondas</span>
                   <Link
@@ -297,13 +280,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                       </svg>
                     </div>
                     <div className="mega-link-text">
-                      <span className="mega-link-title">Injetáveis (IM e SC)</span>
-                      <span className="mega-link-desc">Aplicação com técnica indolor</span>
+                      <span className="mega-link-title">Injetáveis (Intramuscular)</span>
+                      <span className="mega-link-desc">Técnica segura e sítios corretos</span>
                     </div>
                   </Link>
 
                   <Link
-                    to="/servicos/soroterapia"
+                    to="/servicos/administracao-de-medicamentos-por-via-subcutanea"
                     className="mega-link"
                     onClick={() => setActiveMega(null)}
                   >
@@ -313,8 +296,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                       </svg>
                     </div>
                     <div className="mega-link-text">
-                      <span className="mega-link-title">Soroterapia</span>
-                      <span className="mega-link-desc">Hidratação e medicação venosa</span>
+                      <span className="mega-link-title">Injetáveis (Subcutânea)</span>
+                      <span className="mega-link-desc">Insulinas e heparinas com rodízio</span>
                     </div>
                   </Link>
 
@@ -330,13 +313,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                       </svg>
                     </div>
                     <div className="mega-link-text">
-                      <span className="mega-link-title">Sondagem Vesical</span>
-                      <span className="mega-link-desc">Alívio e demora no domicílio</span>
+                      <span className="mega-link-title">Sondagem Vesical de Alívio</span>
+                      <span className="mega-link-desc">Esvaziamento vesical no domicílio</span>
                     </div>
                   </Link>
 
                   <Link
-                    to="/servicos/cuidados-gastrostomia"
+                    to="/servicos/cuidados-com-gastrostomia"
                     className="mega-link"
                     onClick={() => setActiveMega(null)}
                   >
@@ -347,8 +330,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                       </svg>
                     </div>
                     <div className="mega-link-text">
-                      <span className="mega-link-title">Gastrostomia</span>
-                      <span className="mega-link-desc">Higiene e nutrição segura</span>
+                      <span className="mega-link-title">Cuidados com Gastrostomia</span>
+                      <span className="mega-link-desc">Higiene do estoma e nutrição enteral</span>
                     </div>
                   </Link>
                 </div>
@@ -414,24 +397,6 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 <div className="mega-col">
                   <span className="mega-col-label">Assistência Especializada</span>
                   <Link
-                    to="/servicos/consulta"
-                    className="mega-link"
-                    onClick={() => setActiveMega(null)}
-                  >
-                    <div className="mega-link-icon">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                        <rect x="8" y="2" width="8" height="4" rx="1" />
-                        <path d="M9 12h6M9 16h6" />
-                      </svg>
-                    </div>
-                    <div className="mega-link-text">
-                      <span className="mega-link-title">Consulta de Enfermagem</span>
-                      <span className="mega-link-desc">Avaliação clínica detalhada</span>
-                    </div>
-                  </Link>
-
-                  <Link
                     to="/solicitacoes"
                     className="mega-link"
                     onClick={() => setActiveMega(null)}
@@ -449,6 +414,22 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                       <span className="mega-link-desc">Agende e acompanhe em tempo real</span>
                     </div>
                   </Link>
+
+                  <a
+                    href="/#procedimentos"
+                    className="mega-link"
+                    onClick={() => setActiveMega(null)}
+                  >
+                    <div className="mega-link-icon">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 14c1.5-1.5 3-3.5 3-6a5 5 0 0 0-9-3 5 5 0 0 0-9 3c0 2.5 1.5 4.5 3 6l6 6Z" />
+                      </svg>
+                    </div>
+                    <div className="mega-link-text">
+                      <span className="mega-link-title">Catálogo de Procedimentos</span>
+                      <span className="mega-link-desc">Procedimentos técnicos com cobertura por CEP</span>
+                    </div>
+                  </a>
                 </div>
 
                 <div className="mega-col">
@@ -549,13 +530,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                       </svg>
                     </div>
                     <div className="mega-link-text">
-                      <span className="mega-link-title">Cuidado Domiciliar 60+</span>
-                      <span className="mega-link-desc">Conforto e assistência no lar</span>
+                      <span className="mega-link-title">Cuidado Domiciliar Contínuo</span>
+                      <span className="mega-link-desc">Assistência técnica de enfermagem no lar</span>
                     </div>
                   </a>
 
                   <Link
-                    to="/servicos/pessoal"
+                    to="/solicitacoes"
                     className="mega-link"
                     onClick={() => setActiveMega(null)}
                   >
@@ -568,8 +549,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                       </svg>
                     </div>
                     <div className="mega-link-text">
-                      <span className="mega-link-title">Plantões de Enfermagem</span>
-                      <span className="mega-link-desc">Técnicos e enfermeiros dedicados</span>
+                      <span className="mega-link-title">Solicitar Plantão</span>
+                      <span className="mega-link-desc">Agende turnos e visitas de enfermagem</span>
                     </div>
                   </Link>
                 </div>
