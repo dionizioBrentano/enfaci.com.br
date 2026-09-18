@@ -1,90 +1,125 @@
+/* ═══════════════════════════════════════════════
+   ENFACI — Header Mobile-First (Faixa 1)
+   Inspirado no modelo visual 60plus SuperEscolha
+   ═══════════════════════════════════════════════ */
+
+/* ── BARRA BRANCA PRINCIPAL ── */
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #ffffff;
-  padding: 0.875rem 1.25rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  gap: 0.75rem;
+  background-color: #ffffff;
+  min-height: var(--nav-h, 72px);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--se-radius, 8px);
+  box-shadow: var(--se-shadow-sm, 0 2px 8px rgba(26, 58, 53, 0.08));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  position: relative;
+  z-index: 100;
 }
 
-.brandGroup {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  text-decoration: none;
-}
-
-.logo {
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: #2b6cb0;
-  letter-spacing: -0.5px;
-}
-
-.badge {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #718096;
-  background-color: #edf2f7;
-  padding: 0.15rem 0.5rem;
-  border-radius: 9999px;
-}
-
-.navLinks {
+/* ── HAMBÚRGUER (MOBILE) ── */
+.hamburgerBtn {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  border: none;
+  background-color: transparent;
+  color: var(--se-accent, #1a3a35);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.hamburgerBtn:hover {
+  background-color: var(--se-off-white, #f0ede6);
+}
+
+/* ── BOTÃO ENTRAR DOURADO (#b8975a) ── */
+.btnEntrar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--se-gold, #b8975a);
+  color: #ffffff !important;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.5rem 1.15rem;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.btnEntrar:hover {
+  background-color: var(--se-accent, #1a3a35);
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* ── LOGO ENFACI (DIREITA) ── */
+.logoLink {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  height: 42px;
+  max-height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── NAVEGAÇÃO DESKTOP (OCULTA NO MOBILE) ── */
+.desktopNav {
+  display: none;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
-  flex-wrap: wrap;
 }
 
-.link {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #4a5568;
-  text-decoration: none;
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-}
-
-.link:hover {
-  color: #2b6cb0;
-  background-color: #ebf8ff;
-}
-
-.linkActive {
-  color: #2b6cb0;
-  background-color: #ebf8ff;
-  font-weight: 600;
-}
-
-.buttonLink {
+.navLink {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #ffffff;
-  background-color: #2b6cb0;
+  color: var(--se-text, #3a3a3a);
   text-decoration: none;
-  padding: 0.45rem 0.875rem;
+  padding: 0.45rem 0.75rem;
   border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-.buttonLink:hover {
-  background-color: #2c5282;
+.navLink:hover {
+  color: var(--se-accent, #1a3a35);
+  background-color: var(--se-off-white, #f0ede6);
+}
+
+.navLinkActive {
+  color: var(--se-accent, #1a3a35);
+  background-color: var(--se-off-white, #f0ede6);
+  font-weight: 700;
 }
 
 .logoutBtn {
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #e53e3e;
   background: transparent;
   border: 1px solid #fed7d7;
@@ -92,9 +127,188 @@
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
+  margin-left: 0.5rem;
 }
 
 .logoutBtn:hover {
   background-color: #fff5f5;
   border-color: #feb2b2;
+}
+
+/* ── DRAWER TELA CHEIA (MOBILE) ── */
+.drawerBackdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.drawerBackdropOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--se-shadow-lg, 0 20px 60px rgba(0, 0, 0, 0.15));
+  overflow-y: auto;
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+
+.drawerLogoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.drawerLogoImg {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.drawerCloseBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  border: none;
+  background-color: transparent;
+  color: var(--se-text, #3a3a3a);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.drawerCloseBtn:hover {
+  background-color: var(--se-off-white, #f0ede6);
+}
+
+.drawerBody {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawerSectionLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--se-gold, #b8975a);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.drawerList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawerLink {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--se-accent, #1a3a35);
+  text-decoration: none;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  display: block;
+  transition: color 0.15s ease, padding-left 0.15s ease;
+}
+
+.drawerLink:hover {
+  color: var(--se-gold, #b8975a);
+  padding-left: 0.35rem;
+}
+
+.drawerLinkActive {
+  color: var(--se-gold, #b8975a);
+}
+
+.drawerLogoutBtn {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #e53e3e;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0.9rem 0;
+  cursor: pointer;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.drawerFooter {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.drawerBtnEntrar {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: var(--se-gold, #b8975a);
+  color: #ffffff !important;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.85rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.drawerBtnEntrar:hover {
+  background-color: var(--se-accent, #1a3a35);
+}
+
+/* ── DESKTOP (≥768px): ☰ SOME, NAV EM LINHA À ESQUERDA DO LOGO ── */
+@media (min-width: 768px) {
+  .hamburgerBtn {
+    display: none;
+  }
+
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+  }
+
+  .drawer,
+  .drawerBackdrop {
+    display: none;
+  }
+
+  .logoImg {
+    height: 46px;
+  }
 }
