@@ -1,52 +1,20 @@
-:root {
-  /* Tokens de Marca SuperEscolha */
-  --se-accent:       #1a3a35;
-  --se-accent-mid:   #234e47;
-  --se-accent-light: #2d6359;
-
-  --se-gold:         #b8975a;
-  --se-gold-light:   #d4b47a;
-  --se-gold-faint:   rgba(184, 151, 90, 0.10);
-
-  --se-black:        #0d0d0d;
-  --se-white:        #f8f6f1;
-  --se-off-white:    #f0ede6;
-  --se-text:         #3a3a3a;
-  --se-gray:         #909090;
-  --se-gray-light:   #e8e4dc;
-
-  --nav-h:           72px;
-  --se-radius:       8px;
-  --se-radius-pill:  20px;
-
-  --se-shadow-sm:    0 2px 8px rgba(26, 58, 53, 0.08);
-  --se-shadow-md:    0 8px 24px rgba(0, 0, 0, 0.10);
-  --se-shadow-lg:    0 20px 60px rgba(0, 0, 0, 0.12);
-
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #213547;
-  background-color: #f4f6f8;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html,
 body {
   margin: 0;
-  min-width: 320px;
+  padding: 0;
+  width: 100%;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background-color: var(--surface);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
@@ -56,13 +24,6 @@ body {
   flex-direction: column;
 }
 
-/* Conteúdo das páginas com respiro centralizado sem prender o header */
-#root > div > *:not(header):not(aside) {
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  width: 100%;
-}
+
+
 

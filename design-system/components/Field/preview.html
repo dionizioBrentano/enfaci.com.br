@@ -1,0 +1,22 @@
+<!-- @dsCard group="Formulários" height=300 subtitle="Campo com rótulo, ajuda, foco e erro" -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<div class="en-root" style="padding:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start">
+  <div class="field">
+    <label class="field-label" for="f1">CEP do atendimento</label>
+    <input class="field-input" id="f1" inputmode="numeric" placeholder="00000-000">
+    <span class="field-hint">Só para verificar cobertura na região.</span>
+  </div>
+
+  <div class="field">
+    <label class="field-label" for="f2">Data desejada</label>
+    <input class="field-input" id="f2" value="24/09/2026" style="border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,58,53,.12)">
+    <span class="field-hint">Turnos: manhã, tarde ou noite.</span>
+  </div>
+
+  <div class="field field--error">
+    <label class="field-label" for="f3">E-mail</label>
+    <input class="field-input" id="f3" value="maria@" aria-invalid="true" aria-describedby="f3-erro">
+    <span class="field-hint" id="f3-erro">Informe um e-mail completo, como maria@provedor.com.br</span>
+  </div>
+</div>
